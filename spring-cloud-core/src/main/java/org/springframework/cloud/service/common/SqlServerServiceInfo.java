@@ -5,13 +5,14 @@ import org.springframework.cloud.service.ServiceInfo;
 @ServiceInfo.ServiceLabel("sqlserver")
 public class SqlServerServiceInfo extends RelationalServiceInfo {
 	public static final String SQLSERVER_SCHEME = "sqlserver";
-
+	public static final String JTDS_SQLSERVER_SCHEME = "jtds:sqlserver";
+	
 	public SqlServerServiceInfo(String id, String url) {
 		this(id, url, null);
 	}
 
 	public SqlServerServiceInfo(String id, String url, String jdbcUrl) {
-		super(id, url, jdbcUrl, SQLSERVER_SCHEME);
+		super(id, url, jdbcUrl, (jdbcUrl != null && jdbcUrl.contains("jtds")) ? JTDS_SQLSERVER_SCHEME : SQLSERVER_SCHEME);
 	}
 
 	@Override
